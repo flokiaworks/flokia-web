@@ -210,12 +210,14 @@ section { padding: 120px 0; }
 }
 .about-visual {
   border-radius: var(--radius);
-  background: linear-gradient(135deg, var(--pastel-lavender), var(--pastel-peach), var(--pastel-mint));
-  display: flex; align-items: center; justify-content: center;
   overflow: hidden;
   position: relative;
   box-shadow: var(--shadow-lg);
-  min-height: 400px;
+  line-height: 0;
+}
+.about-visual img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
 }
 .about-stats {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
@@ -227,7 +229,9 @@ section { padding: 120px 0; }
   padding: 24px 16px;
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+.stat-item:hover { transform: scale(1.05); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
 .stat-number {
   font-size: 32px; font-weight: 800; color: var(--primary);
   letter-spacing: -0.02em;
@@ -249,7 +253,7 @@ section { padding: 120px 0; }
   position: relative;
   overflow: hidden;
 }
-.service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.service-card:hover { transform: scale(1.03); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
 .service-card:nth-child(1) { background: var(--pastel-lavender); }
 .service-card:nth-child(2) { background: var(--pastel-peach); }
 .service-card:nth-child(3) { background: var(--pastel-mint); }
@@ -290,7 +294,7 @@ section { padding: 120px 0; }
   position: relative;
   transition: all 0.3s;
 }
-.package-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
+.package-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.12); transform: scale(1.03); }
 .package-card.featured {
   border-color: var(--primary);
   box-shadow: 0 0 0 1px var(--primary), var(--shadow-md);
@@ -402,7 +406,7 @@ section { padding: 120px 0; }
   border-radius: var(--radius); padding: 44px 36px;
   transition: all 0.3s;
 }
-.contact-card:hover { box-shadow: var(--shadow-md); }
+.contact-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.12); transform: scale(1.02); }
 .contact-card h3 {
   font-size: 21px; font-weight: 700; margin-bottom: 14px;
   letter-spacing: var(--tracking-tight);
@@ -541,7 +545,7 @@ footer {
         </div>
       </div>
       <div class="about-visual fade-up">
-        <img src="eva-flower.jpg" alt="FLOKIA 자이언트 플라워" style="width:100%; height:100%; object-fit:cover;">
+        <!-- 여기에 꽃 이미지 삽입 -->
       </div>
     </div>
   </div>
@@ -552,7 +556,7 @@ footer {
   <div class="container">
     <div class="services-header fade-up">
       <div class="section-label">Services</div>
-      <h2 class="section-title">플로키아가 제공하는 가치</h2>
+      <h2 class="section-title">루미나가 제공하는 가치</h2>
       <p class="section-desc">기획부터 설치·운영·철거·보관까지, 공간 연출의 모든 과정을 일괄 대행합니다.</p>
     </div>
     <div class="service-cards">
@@ -757,7 +761,7 @@ footer {
           <h4>회사</h4>
           <a href="#about">회사소개</a>
           <a href="#contact">사업 제휴</a>
-          <a href="#">Instagram</a>
+          <a href="https://www.instagram.com/flokiastudio/" target="_blank">Instagram</a>
         </div>
       </div>
     </div>
