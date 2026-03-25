@@ -231,7 +231,7 @@ section { padding: 120px 0; }
   box-shadow: var(--shadow-sm);
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.stat-item:hover { transform: scale(1.05); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+.stat-item:hover { transform: scale(1.06); box-shadow: 0 12px 32px rgba(0,0,0,0.12); z-index: 2; }
 .stat-number {
   font-size: 32px; font-weight: 800; color: var(--primary);
   letter-spacing: -0.02em;
@@ -249,11 +249,11 @@ section { padding: 120px 0; }
 .service-card {
   border-radius: var(--radius);
   padding: 40px 36px;
-  transition: all 0.3s;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: relative;
   overflow: hidden;
 }
-.service-card:hover { transform: scale(1.03); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+.service-card:hover { transform: scale(1.045); box-shadow: 0 16px 48px rgba(0,0,0,0.14); z-index: 2; }
 .service-card:nth-child(1) { background: var(--pastel-lavender); }
 .service-card:nth-child(2) { background: var(--pastel-peach); }
 .service-card:nth-child(3) { background: var(--pastel-mint); }
@@ -292,9 +292,9 @@ section { padding: 120px 0; }
   border-radius: var(--radius);
   padding: 36px 28px;
   position: relative;
-  transition: all 0.3s;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.package-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.12); transform: scale(1.03); }
+.package-card:hover { transform: scale(1.045); box-shadow: 0 16px 48px rgba(0,0,0,0.14); z-index: 2; }
 .package-card.featured {
   border-color: var(--primary);
   box-shadow: 0 0 0 1px var(--primary), var(--shadow-md);
@@ -404,9 +404,9 @@ section { padding: 120px 0; }
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius); padding: 44px 36px;
-  transition: all 0.3s;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.contact-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.12); transform: scale(1.02); }
+.contact-card:hover { transform: scale(1.035); box-shadow: 0 16px 48px rgba(0,0,0,0.14); z-index: 2; }
 .contact-card h3 {
   font-size: 21px; font-weight: 700; margin-bottom: 14px;
   letter-spacing: var(--tracking-tight);
@@ -545,7 +545,7 @@ footer {
         </div>
       </div>
       <div class="about-visual fade-up">
-        <!-- 여기에 꽃 이미지 삽입 -->
+        <img src="eva-flower.jpg" alt="FLOKIA 자이언트 플라워" style="width:100%; height:100%; object-fit:cover;">
       </div>
     </div>
   </div>
