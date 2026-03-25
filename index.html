@@ -50,7 +50,7 @@
   --shadow-lg: 0 8px 32px rgba(0,0,0,0.08);
 }
 
-html { scroll-behavior: smooth; font-size: 16px; }
+html { font-size: 16px; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
 
 body {
   font-family: var(--font);
@@ -101,7 +101,15 @@ nav .container {
 .nav-cta:hover { background: #FF6B59; transform: translateY(-1px); }
 
 .mobile-menu { display: none; background: none; color: var(--black); font-size: 24px; }
-
+  
+/* ===== SCROLL SNAP SECTIONS ===== */
+.snap-section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
 /* ===== HERO ===== */
 .hero {
   min-height: 100vh;
@@ -202,6 +210,7 @@ section { padding: 120px 0; }
   letter-spacing: var(--tracking-tight);
 }
 
+
 /* ===== ABOUT ===== */
 .about { background: var(--bg); }
 .about-grid {
@@ -253,7 +262,7 @@ section { padding: 120px 0; }
   position: relative;
   overflow: hidden;
 }
-.service-card:hover { transform: scale(1.045); box-shadow: 0 16px 48px rgba(0,0,0,0.14); z-index: 2; }
+.service-card:hover { transform: scale(1.045); !important; box-shadow: 0 16px 48px rgba(0,0,0,0.14); z-index: 2; }
 .service-card:nth-child(1) { background: var(--pastel-lavender); }
 .service-card:nth-child(2) { background: var(--pastel-peach); }
 .service-card:nth-child(3) { background: var(--pastel-mint); }
@@ -294,7 +303,7 @@ section { padding: 120px 0; }
   position: relative;
   transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.package-card:hover { transform: scale(1.045); box-shadow: 0 16px 48px rgba(0,0,0,0.14); z-index: 2; }
+.package-card:hover { transform: scale(1.045); !important; box-shadow: 0 16px 48px rgba(0,0,0,0.14); z-index: 2; }
 .package-card.featured {
   border-color: var(--primary);
   box-shadow: 0 0 0 1px var(--primary), var(--shadow-md);
@@ -406,7 +415,7 @@ section { padding: 120px 0; }
   border-radius: var(--radius); padding: 44px 36px;
   transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.contact-card:hover { transform: scale(1.035); box-shadow: 0 16px 48px rgba(0,0,0,0.14); z-index: 2; }
+.contact-card:hover { transform: scale(1.035); !important; box-shadow: 0 16px 48px rgba(0,0,0,0.14); z-index: 2; }
 .contact-card h3 {
   font-size: 21px; font-weight: 700; margin-bottom: 14px;
   letter-spacing: var(--tracking-tight);
@@ -461,16 +470,18 @@ footer {
 
 /* ===== ANIMATIONS ===== */
 .fade-up {
-  opacity: 0; transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  opacity: 0;
+  transition: opacity 0.7s ease;
 }
-.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up.visible { opacity: 1; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
   .package-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
+  html { scroll-snap-type: none; }
+  .snap-section { min-height: auto; }
   .nav-links { display: none; }
   .mobile-menu { display: block; }
   .about-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -504,8 +515,18 @@ footer {
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
+  <!-- HERO (영상 삽입 가능) -->
+<section class="hero snap-section">
+  <!-- 영상을 넣으려면: hero-video.mp4 파일을 GitHub에 업로드 후 아래 주석 해제 -->
+  <!--
+  <div class="hero-video-wrap">
+    <video autoplay muted loop playsinline>
+      <source src="hero-video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+  </div>
+  -->
+  
   <div class="hero-content fade-up">
     <div class="hero-badge">매 시즌 새 꽃, 같은 구조</div>
     <h1>콘셉트는 바꾸되,<br><span class="accent">구조는 버리지 않는다</span></h1>
@@ -518,7 +539,7 @@ footer {
 </section>
 
 <!-- ABOUT -->
-<section class="about" id="about">
+<section class="about snap-section" id="about">
   <div class="container">
     <div class="about-grid">
       <div class="fade-up">
@@ -552,7 +573,7 @@ footer {
 </section>
 
 <!-- SERVICES (Maeve-style 2x2 pastel cards) -->
-<section class="services" id="services">
+<section class="services snap-section" id="services">
   <div class="container">
     <div class="services-header fade-up">
       <div class="section-label">Services</div>
