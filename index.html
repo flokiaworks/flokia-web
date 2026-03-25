@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FLOKIA — 자이언트 플라워 모듈 공간 콘텐츠 서비스</title>
+<title>FLOKIA — 공간 콘텐츠 자산 운영 서비스</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
 <style>
@@ -20,26 +20,19 @@
   --text-muted: #999;
   --border: #E8E4DC;
   --border-light: #F0EDE6;
-
-  /* Key Color: 소프트 코랄 계열 */
   --primary: #FF7B6B;
   --primary-soft: #FFADA3;
   --primary-bg: #FFF0EE;
-
-  /* Pastel palette for cards */
   --pastel-lavender: #E8DEFF;
   --pastel-peach: #FFE0D0;
   --pastel-mint: #D4F5E9;
   --pastel-lemon: #FFF5CC;
   --pastel-sky: #D6EEFF;
   --pastel-rose: #FFD6E0;
-
-  /* Accent dots */
   --lavender: #9B7FE6;
   --peach: #FF8C5A;
   --mint: #4ECBA0;
   --lemon: #E6C840;
-
   --font: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --tracking-tight: -0.02em;
   --tracking-normal: -0.01em;
@@ -48,6 +41,8 @@
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
   --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
   --shadow-lg: 0 8px 32px rgba(0,0,0,0.08);
+  --hover-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  --ease-apple: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 html { font-size: 16px; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
@@ -101,7 +96,7 @@ nav .container {
 .nav-cta:hover { background: #FF6B59; transform: translateY(-1px); }
 
 .mobile-menu { display: none; background: none; color: var(--black); font-size: 24px; }
-  
+
 /* ===== SCROLL SNAP SECTIONS ===== */
 .snap-section {
   scroll-snap-align: start;
@@ -110,36 +105,27 @@ nav .container {
   align-items: center;
   position: relative;
 }
+
 /* ===== HERO ===== */
 .hero {
-  min-height: 100vh;
-  display: flex; align-items: center; justify-content: center;
   text-align: center;
   padding: 120px 24px 80px;
-  position: relative;
   overflow: hidden;
   background: var(--bg);
 }
-.hero::before {
-  content: '';
-  position: absolute;
-  width: 600px; height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,123,107,0.12) 0%, transparent 70%);
-  top: 10%; left: 50%;
-  transform: translateX(-50%);
-  pointer-events: none;
+.hero-video-wrap {
+  position: absolute; inset: 0;
+  overflow: hidden;
 }
-.hero::after {
-  content: '';
-  position: absolute;
-  width: 400px; height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(232,222,255,0.3) 0%, transparent 70%);
-  bottom: 20%; right: 10%;
-  pointer-events: none;
+.hero-video-wrap video {
+  width: 100%; height: 100%;
+  object-fit: cover;
 }
-.hero-content { position: relative; z-index: 1; max-width: 800px; }
+.hero-video-wrap .hero-overlay {
+  position: absolute; inset: 0;
+  background: rgba(247, 245, 240, 0.55);
+}
+.hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
 .hero-badge {
   display: inline-block;
   padding: 6px 18px; border-radius: 100px;
@@ -147,6 +133,7 @@ nav .container {
   color: var(--primary); font-size: 13px; font-weight: 600;
   letter-spacing: 0.02em;
   margin-bottom: 32px;
+  backdrop-filter: blur(8px);
 }
 .hero h1 {
   font-size: clamp(40px, 7vw, 68px);
@@ -174,7 +161,7 @@ nav .container {
   padding: 16px 36px; border-radius: 100px;
   background: var(--primary); color: var(--white);
   font-size: 16px; font-weight: 600;
-  transition: all 0.3s;
+  transition: all 0.3s var(--ease-apple);
   letter-spacing: var(--tracking-tight);
   box-shadow: 0 4px 16px rgba(255,123,107,0.25);
 }
@@ -184,7 +171,7 @@ nav .container {
   background: var(--white); color: var(--text);
   font-size: 16px; font-weight: 500;
   border: 1px solid var(--border);
-  transition: all 0.3s;
+  transition: all 0.3s var(--ease-apple);
   letter-spacing: var(--tracking-tight);
 }
 .btn-secondary:hover { border-color: var(--text-muted); background: #FAFAF7; }
@@ -209,7 +196,6 @@ section { padding: 120px 0; }
   max-width: 560px;
   letter-spacing: var(--tracking-tight);
 }
-
 
 /* ===== ABOUT ===== */
 .about { background: var(--bg); }
@@ -238,9 +224,9 @@ section { padding: 120px 0; }
   padding: 24px 16px;
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-sm);
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.4s var(--ease-apple), box-shadow 0.4s var(--ease-apple);
 }
-.stat-item:hover { transform: scale(1.06); box-shadow: 0 12px 32px rgba(0,0,0,0.12); z-index: 2; }
+.stat-item:hover { transform: scale(1.08) !important; box-shadow: var(--hover-shadow); z-index: 2; }
 .stat-number {
   font-size: 32px; font-weight: 800; color: var(--primary);
   letter-spacing: -0.02em;
@@ -258,11 +244,11 @@ section { padding: 120px 0; }
 .service-card {
   border-radius: var(--radius);
   padding: 40px 36px;
-  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.4s var(--ease-apple), box-shadow 0.4s var(--ease-apple);
   position: relative;
   overflow: hidden;
 }
-.service-card:hover { transform: scale(1.045); !important; box-shadow: 0 16px 48px rgba(0,0,0,0.14); z-index: 2; }
+.service-card:hover { transform: scale(1.05) !important; box-shadow: var(--hover-shadow); z-index: 2; }
 .service-card:nth-child(1) { background: var(--pastel-lavender); }
 .service-card:nth-child(2) { background: var(--pastel-peach); }
 .service-card:nth-child(3) { background: var(--pastel-mint); }
@@ -281,7 +267,6 @@ section { padding: 120px 0; }
   font-size: 15px; color: var(--text-sub); line-height: 1.7;
   letter-spacing: var(--tracking-tight);
 }
-/* Corner decorators like Maeve */
 .service-card::before,
 .service-card::after {
   content: '+'; position: absolute;
@@ -301,9 +286,9 @@ section { padding: 120px 0; }
   border-radius: var(--radius);
   padding: 36px 28px;
   position: relative;
-  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.4s var(--ease-apple), box-shadow 0.4s var(--ease-apple);
 }
-.package-card:hover { transform: scale(1.045); !important; box-shadow: 0 16px 48px rgba(0,0,0,0.14); z-index: 2; }
+.package-card:hover { transform: scale(1.05) !important; box-shadow: var(--hover-shadow); z-index: 2; }
 .package-card.featured {
   border-color: var(--primary);
   box-shadow: 0 0 0 1px var(--primary), var(--shadow-md);
@@ -354,7 +339,11 @@ section { padding: 120px 0; }
 .process-header { text-align: center; margin-bottom: 64px; }
 .process-header .section-desc { margin: 0 auto; }
 .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
-.process-step { text-align: center; }
+.process-step {
+  text-align: center;
+  transition: transform 0.4s var(--ease-apple);
+}
+.process-step:hover { transform: scale(1.06) !important; }
 .step-number {
   display: inline-flex; align-items: center; justify-content: center;
   width: 52px; height: 52px; border-radius: 50%;
@@ -375,11 +364,8 @@ section { padding: 120px 0; }
 /* ===== FAQ ===== */
 .faq { background: var(--bg); }
 .faq-header { text-align: center; margin-bottom: 64px; }
-.faq-header .section-desc { margin: 0 auto; }
 .faq-list { max-width: 720px; margin: 0 auto; }
-.faq-item {
-  border-bottom: 1px solid var(--border);
-}
+.faq-item { border-bottom: 1px solid var(--border); }
 .faq-question {
   width: 100%; padding: 24px 0;
   display: flex; justify-content: space-between; align-items: center;
@@ -406,16 +392,16 @@ section { padding: 120px 0; }
   letter-spacing: var(--tracking-tight);
 }
 
-/* ===== CONTACT / PARTNERSHIP ===== */
+/* ===== CONTACT ===== */
 .contact { background: var(--white); }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
 .contact-card {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius); padding: 44px 36px;
-  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.4s var(--ease-apple), box-shadow 0.4s var(--ease-apple);
 }
-.contact-card:hover { transform: scale(1.035); !important; box-shadow: 0 16px 48px rgba(0,0,0,0.14); z-index: 2; }
+.contact-card:hover { transform: scale(1.04) !important; box-shadow: var(--hover-shadow); z-index: 2; }
 .contact-card h3 {
   font-size: 21px; font-weight: 700; margin-bottom: 14px;
   letter-spacing: var(--tracking-tight);
@@ -439,6 +425,7 @@ footer {
   padding: 64px 0 40px;
   border-top: 1px solid var(--border);
   background: var(--bg);
+  scroll-snap-align: end;
 }
 .footer-top {
   display: flex; justify-content: space-between; align-items: flex-start;
@@ -468,7 +455,7 @@ footer {
   letter-spacing: var(--tracking-tight);
 }
 
-/* ===== ANIMATIONS ===== */
+/* ===== ENTRANCE ANIMATION (opacity only, no transform conflict) ===== */
 .fade-up {
   opacity: 0;
   transition: opacity 0.7s ease;
@@ -515,7 +502,7 @@ footer {
   </div>
 </nav>
 
-  <!-- HERO (영상 삽입 가능) -->
+<!-- HERO (영상 삽입 가능) -->
 <section class="hero snap-section">
   <!-- 영상을 넣으려면: hero-video.mp4 파일을 GitHub에 업로드 후 아래 주석 해제 -->
   <!--
@@ -526,10 +513,9 @@ footer {
     <div class="hero-overlay"></div>
   </div>
   -->
-  
   <div class="hero-content fade-up">
     <div class="hero-badge">매 시즌 새 꽃, 같은 구조</div>
-    <h1>콘셉트는 바꾸되,<br><span class="accent">구조는 버리지 않는다</span></h1>
+    <h1>꽃은 피고 지지만,<br><span class="accent">공간은 계속된다</span></h1>
     <p>키네틱 구동과 프로젝션 매핑 기술을 결합한<br>재사용 가능한 자이언트 플라워 모듈 임대·운영 서비스</p>
     <div class="hero-buttons">
       <a href="#packages" class="btn-primary">패키지 보기</a>
@@ -566,18 +552,18 @@ footer {
         </div>
       </div>
       <div class="about-visual fade-up">
-        <img src="eva-flower.jpg" alt="FLOKIA 자이언트 플라워" style="width:100%; height:100%; object-fit:cover;">
+        <img src="eva-flower.jpg" alt="FLOKIA 자이언트 플라워">
       </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES (Maeve-style 2x2 pastel cards) -->
+<!-- SERVICES -->
 <section class="services snap-section" id="services">
   <div class="container">
     <div class="services-header fade-up">
       <div class="section-label">Services</div>
-      <h2 class="section-title">플로키아가 제공하는 가치</h2>
+      <h2 class="section-title">루미나가 제공하는 가치</h2>
       <p class="section-desc">기획부터 설치·운영·철거·보관까지, 공간 연출의 모든 과정을 일괄 대행합니다.</p>
     </div>
     <div class="service-cards">
@@ -605,8 +591,8 @@ footer {
   </div>
 </section>
 
-<!-- PACKAGES (4개: BASIC / STANDARD / KINETIC / MAPPING) -->
-<section class="packages" id="packages">
+<!-- PACKAGES -->
+<section class="packages snap-section" id="packages">
   <div class="container">
     <div class="packages-header fade-up">
       <div class="section-label">Packages</div>
@@ -614,7 +600,6 @@ footer {
       <p class="section-desc">기준기간 2박3일 (설치·운영·철거 포함). 추가일 별도 협의.</p>
     </div>
     <div class="package-grid">
-      <!-- BASIC -->
       <div class="package-card fade-up">
         <div class="package-name">BASIC</div>
         <div class="package-price">90<span>만 원</span></div>
@@ -626,9 +611,8 @@ footer {
         </ul>
         <button class="package-btn">문의하기</button>
       </div>
-      <!-- STANDARD ★ -->
       <div class="package-card featured fade-up">
-        <div class="package-badge">BEST</div>
+        <div class="package-badge">추천</div>
         <div class="package-name">STANDARD</div>
         <div class="package-price">130<span>만 원</span></div>
         <div class="package-period">스태틱 믹스 | 2박3일</div>
@@ -640,7 +624,6 @@ footer {
         </ul>
         <button class="package-btn">문의하기</button>
       </div>
-      <!-- KINETIC (신규) -->
       <div class="package-card fade-up">
         <div class="package-name">KINETIC</div>
         <div class="package-price">170<span>만 원</span></div>
@@ -653,7 +636,6 @@ footer {
         </ul>
         <button class="package-btn">문의하기</button>
       </div>
-      <!-- MAPPING -->
       <div class="package-card fade-up">
         <div class="package-name">MAPPING</div>
         <div class="package-price">250<span>만 원</span></div>
@@ -671,7 +653,7 @@ footer {
 </section>
 
 <!-- PROCESS -->
-<section class="process" id="process">
+<section class="process snap-section" id="process">
   <div class="container">
     <div class="process-header fade-up">
       <div class="section-label">Process</div>
@@ -704,7 +686,7 @@ footer {
 </section>
 
 <!-- FAQ -->
-<section class="faq" id="faq">
+<section class="faq snap-section" id="faq">
   <div class="container">
     <div class="faq-header fade-up">
       <div class="section-label">FAQ</div>
@@ -728,7 +710,7 @@ footer {
         <div class="faq-answer"><p>매핑 콘텐츠는 브랜드 컬러, 시즌 테마, 이벤트 콘셉트에 맞춰 완전히 새롭게 제작됩니다. 꽃머리 색상·소재 변경, 키네틱 동작 패턴 조정도 가능합니다. CUSTOM 패키지에서는 전 소재를 자유롭게 믹스할 수 있습니다.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">운영 인력이 없어도 괜찮나요?</button>
+        <button class="faq-question">운영 인력이 없어도 괜찮은가요?</button>
         <div class="faq-answer"><p>플로키아가 설치부터 운영, 철거까지 전 과정을 표준 매뉴얼 기반으로 지원합니다. 현장 담당자가 처음이더라도 안정적으로 운영할 수 있도록 가이드를 제공합니다.</p></div>
       </div>
     </div>
@@ -736,7 +718,7 @@ footer {
 </section>
 
 <!-- CONTACT & PARTNERSHIP -->
-<section class="contact" id="contact">
+<section class="contact snap-section" id="contact">
   <div class="container">
     <div class="fade-up" style="text-align:center; margin-bottom: 64px;">
       <div class="section-label">Contact</div>
@@ -763,7 +745,7 @@ footer {
     <div class="footer-top">
       <div>
         <div class="footer-logo">FLOKIA</div>
-        <div class="footer-tagline">콘셉트는 바꾸되, 구조는 버리지 않는다</div>
+        <div class="footer-tagline">꽃은 피고 지지만, 공간은 계속된다</div>
       </div>
       <div class="footer-links">
         <div class="footer-col">
@@ -794,7 +776,7 @@ footer {
 </footer>
 
 <script>
-// Scroll Animation
+// Scroll Animation (opacity only - no transform to avoid hover conflict)
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
