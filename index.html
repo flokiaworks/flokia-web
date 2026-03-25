@@ -209,18 +209,13 @@ section { padding: 120px 0; }
   align-items: center;
 }
 .about-visual {
-  aspect-ratio: 4/3; border-radius: var(--radius);
+  border-radius: var(--radius);
   background: linear-gradient(135deg, var(--pastel-lavender), var(--pastel-peach), var(--pastel-mint));
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
   position: relative;
   box-shadow: var(--shadow-lg);
-}
-.about-visual::after {
-  content: '꽃 이미지 삽입';
-  font-size: 14px; color: var(--text-sub);
-  background: rgba(255,255,255,0.7);
-  padding: 8px 16px; border-radius: 8px;
+  min-height: 400px;
 }
 .about-stats {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
